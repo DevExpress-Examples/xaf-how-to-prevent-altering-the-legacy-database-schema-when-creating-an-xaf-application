@@ -1,3 +1,11 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [Model.DesignedDiffs.xafml](./CS/WinWebSolution.Module/Model.DesignedDiffs.xafml)
+* [Module.cs](./CS/WinWebSolution.Module/Module.cs) (VB: [Module.vb](./VB/WinWebSolution.Module/Module.vb))
+* [XpoDataStoreProxy.cs](./CS/WinWebSolution.Module/XpoDataStoreProxy.cs) (VB: [XpoDataStoreProxy.vb](./VB/WinWebSolution.Module/XpoDataStoreProxy.vb))
+* [XpoDataStoreProxyProvider.cs](./CS/WinWebSolution.Module/XpoDataStoreProxyProvider.cs) (VB: [XpoDataStoreProxyProvider.vb](./VB/WinWebSolution.Module/XpoDataStoreProxyProvider.vb))
+<!-- default file list end -->
 # How to prevent altering the legacy database schema when creating an XAF application
 
 
