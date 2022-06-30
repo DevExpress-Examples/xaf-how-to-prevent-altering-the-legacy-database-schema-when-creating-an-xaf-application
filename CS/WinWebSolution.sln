@@ -1,10 +1,12 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWebSolution.Module", "WinWebSolution.Module\WinWebSolution.Module.csproj", "{928317A6-FCB1-48D9-BFCC-8394F9722113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWebSolution.Win", "WinWebSolution.Win\WinWebSolution.Win.csproj", "{83C4388C-358E-4083-B3A1-0912145361E6}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "WinWebSolution.Web", "WinWebSolution.Web\WinWebSolution.Web.csproj", "{6C22666C-8171-4F08-B610-421AAA6DA68C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWebSolution.Web", "WinWebSolution.Web\WinWebSolution.Web.csproj", "{6C22666C-8171-4F08-B610-421AAA6DA68C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
