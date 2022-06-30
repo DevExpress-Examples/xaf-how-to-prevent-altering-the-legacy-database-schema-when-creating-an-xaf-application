@@ -22,15 +22,7 @@ public class AspNetCoreBlazorApplication : BlazorApplication {
         }
 #endif
     }
-    protected override void OnCreateCustomObjectSpaceProvider(CreateCustomObjectSpaceProviderEventArgs args) {
-        base.OnCreateCustomObjectSpaceProvider(args);
-        var provider = ServiceProvider.GetRequiredService<XpoDataStoreProxyProvider>();
-        if(provider == null) {
-            provider = new XpoDataStoreProxyProvider();
-        }
-        args.ObjectSpaceProvider = new XPObjectSpaceProvider(provider);
 
-    }
     protected override void OnCustomCheckCompatibility(CustomCheckCompatibilityEventArgs args) {
         base.OnCustomCheckCompatibility(args);
         var configuration = ServiceProvider.GetRequiredService<IConfiguration>();

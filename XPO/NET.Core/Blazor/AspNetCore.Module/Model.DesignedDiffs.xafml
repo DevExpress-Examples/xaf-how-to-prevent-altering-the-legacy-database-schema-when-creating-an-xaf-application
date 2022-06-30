@@ -1,5 +1,15 @@
-﻿<?xml version="1.0" ?>
-<Application Title="AspNetCore">
-  <Views>
-  </Views>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="AspNetCore" Logo="ExpressAppLogo">
+  <NavigationItems NavigationStyle="TreeList">
+    <Items>
+      <Item Id="Default" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@b52df90b-aa96-4328-8fcd-02353be061f7" ViewId="Note_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="22.1.3.0" IsNewNode="True" />
+  </SchemaModules>
 </Application>

@@ -19,7 +19,13 @@ namespace AspNetCore.Module;
 public sealed class AspNetCoreModule : ModuleBase {
     public AspNetCoreModule() {
 		RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.SystemModule.SystemModule));
+        AdditionalExportedTypes.Add(typeof(XPCustomObject));
+        AdditionalExportedTypes.Add(typeof(XPBaseObject));
+        AdditionalExportedTypes.Add(typeof(PersistentBase));
         AdditionalExportedTypes.Add(typeof(Note));
+        AdditionalExportedTypes.Add(typeof(BaseObject));
+        RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.SystemModule.SystemModule));
+        RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule));
     }
     
     public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB) {

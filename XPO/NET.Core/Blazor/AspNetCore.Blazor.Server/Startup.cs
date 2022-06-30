@@ -31,24 +31,9 @@ public class Startup {
         services.AddXaf(Configuration, builder => {
             builder.UseApplication<AspNetCoreBlazorApplication>();
             builder.Modules
-                .Add<AspNetCore.Module.AspNetCoreModule>()
-            	.Add<AspNetCoreBlazorModule>();
+                .Add<AspNetCore.Module.AspNetCoreModule>();
             builder.ObjectSpaceProviders
-                .AddXpo((serviceProvider, options) => {
-                    string connectionString = null;
-                    if(Configuration.GetConnectionString("ConnectionString") != null) {
-                        connectionString = Configuration.GetConnectionString("ConnectionString");
-                    }
-#if EASYTEST
-                    if(Configuration.GetConnectionString("EasyTestConnectionString") != null) {
-                        connectionString = Configuration.GetConnectionString("EasyTestConnectionString");
-                    }
-#endif
-                    ArgumentNullException.ThrowIfNull(connectionString);
-                    options.ConnectionString = connectionString;
-                    options.ThreadSafe = true;
-                    options.UseSharedDataStoreProvider = true;
-                })
+                .Add(serviceProvider => new XPObjectSpaceProvider(serviceProvider.GetRequiredService<XpoDataStoreProxyProvider>()))
                 .AddNonPersistent();
         });
     }
