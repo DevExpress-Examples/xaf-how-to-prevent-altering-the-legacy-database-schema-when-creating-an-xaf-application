@@ -4,35 +4,39 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 <!-- default file list -->
-### Files to look at:
+### Files to look at
 
-- [Module.cs](./AspNetCore/AspNetCore.Module/Module.cs)
-- [XpoDataStoreProxy.cs](./AspNetCore/AspNetCore.Module/Services/XpoDataStoreProxy.cs)
-- [XpoDataStoreProxyProvider.cs](./AspNetCore/AspNetCore.Module/Services/XpoDataStoreProxyProvider.cs)
+- [Module.cs](./XPO/NET.Framework/WinWebSolution.Module/Module.cs) for Win/Web or [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs) for Blazor
+- [XpoDataStoreProxy.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxy.cs)
+- [XpoDataStoreProxyProvider.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxyProvider.cs)
 <!-- default file list end -->
 # How to prevent altering the legacy database schema when creating an XAF application
 
 ## Scenario
-This example shows how to prevent altering the legacy database schema when creating an XAF application. Sometimes our customers want to connect their XAF applications to legacy databases, but they often have strong restrictions, which disallow making any changes in the legacy database schema, i.e. adding new tables, new columns. This is bad, because [XAF creates the ModuleInfo table](https://documentation.devexpress.com/#Xaf/CustomDocument3070) to use an application's version for internal purposes. XPO itself [can add the XPObjectType table](http://documentation.devexpress.com/#XPO/CustomDocument2632) to correctly manage table hierarchies when one persistent object inherits another one. Usually, legacy databases contain plain tables that can be mapped to one persistent object. So, the XPObjectType table is not necessary in such scenarios. 
+
+This example shows how to prevent altering the legacy database schema when creating an XAF application. Sometimes our customers want to connect their XAF applications to legacy databases, but they often have strong restrictions, which disallow making any changes in the legacy database schema, i.e. adding new tables, new columns. This is bad, because [XAF creates the ModuleInfo table](https://documentation.devexpress.com/#Xaf/CustomDocument3070) to use an application's version for internal purposes. XPO itself [can add the XPObjectType table](http://documentation.devexpress.com/#XPO/CustomDocument2632) to correctly manage table hierarchies when one persistent object inherits another one. Usually, legacy databases contain plain tables that can be mapped to one persistent object. So, the XPObjectType table is not necessary in such scenarios.
 
 However, one problem still remains: it is the additional _ModuleInfo_ table added by XAF itself. The idea is to move the ModuleInfo and XPObjectType tables into a temporary database.
 
 ![](https://raw.githubusercontent.com/DevExpress-Examples/how-to-prevent-altering-the-legacy-database-schema-when-creating-an-xaf-application-e1150/15.2.4+/media/d3ec394f-faf6-42fc-aff8-e11f6aaa58f2.png)
 
 For this task we introduced a custom [IDataStoreAsync](https://documentation.devexpress.com/CoreLibraries/DevExpress.Xpo.DB.IDataStoreAsync.class) implementation, which works as a proxy. This proxy receives all the requests from the application's Session objects to a data store, and redirects them to actual XPO data store objects based upon a table name that has been passed.
+
 ### Steps to implement
-1. In _YourSolutionName.Module_ project create a custom _IDataStore_ implementation as shown in the _AspNetCore.Module\XpoDataStoreProxy.xx_ file;
-2. In _YourSolutionName.Module_ project create a custom _IXpoDataStoreProvider _implementation as shown in the _AspNetCore.Module\XpoDataStoreProxyProvider.xx_ file;
-3. In _YourSolutionName.Module_ project locate the _ModuleBase _descendant and modify it as shown in the _AspNetCore.Module\Module.xx_ file;
-4. Define connection strings under the _<connectionStrings>_ element in the configuration files of your WinForms and ASP.NET executable projects as shown in the _AspNetCore.Win\App.config_ and _AspNetCore.Win\Web.config_ files.
+
+1. In _YourSolutionName.Module_ project create a custom _IDataStoreAsync_ implementation as shown in the [XpoDataStoreProxy.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxy.cs) file;
+2. In _YourSolutionName.Module_ project create a custom _IXpoDataStoreProvider_ implementation as shown in the [XpoDataStoreProxyProvider.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxyProvider.cs) file;
+3. For Blazor, in _YourSolutionName.Blazor.Server_ project locate the XAF Application Builder invokation and modify the ObjectSpaceProviders initialization as shown in the [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs) file;
+4. For Win/Web, in _YourSolutionName.Module_ project locate the _ModuleBase_ descendant and modify it as shown in the [Module.cs](./XPO/NET.Framework/WinWebSolution.Module/Module.cs) file;
+5. Define connection strings under the _\<connectionStrings>_ element in the configuration files of your WinForms and ASP.NET executable projects as shown in the _WinWebSolution.Win\App.config_, _WinWebSolution.Win\Web.config_ and _AspNetCore.Blazor.Server\appsettings.json_ files.
+
 ### IMPORTANT NOTES
-1. The approach shown here is intended for plain database tables (no inheritance between your persistent objects). If the classes you added violate this requirement, the exception will occur as expected, because it's impossible to perform a query between two different databases by default. 
-2. One of the limitations is that an object stored in one database cannot refer to an object stored in another database via a persistent property. Besides the fact that a criteria operator based on such a reference property cannot be evaluated, referenced objects are automatically loaded by XPO without involving the _IDataStore.SelectData_ method. So, these queries cannot be redirected. As a solution, you can implement a non-persistent reference property and use the _SessionThatPointsToAnotherDatabase.GetObjectByKey_ method to load a referenced object manually.
+
+1. The approach shown here is intended for plain database tables (no inheritance between your persistent objects). If the classes you added violate this requirement, the exception will occur as expected, because it's impossible to perform a query between two different databases by default.
+2. One of the limitations is that an object stored in one database cannot refer to an object stored in another database via a persistent property. Besides the fact that a criteria operator based on such a reference property cannot be evaluated, referenced objects are automatically loaded by XPO without involving the _IDataStoreAsync.SelectData_ method. So, these queries cannot be redirected. As a solution, you can implement a non-persistent reference property and use the _SessionThatPointsToAnotherDatabase.GetObjectByKey_ method to load a referenced object manually.
 3. As an alternative to the demonstrated proxy solution you can consider solutions based on database server features. Create a view mapped to a table in another database as a [Synonym](https://docs.microsoft.com/en-us/sql/relational-databases/synonyms/synonyms-database-engine). Then map a regular persistent class to this view (see [How to: Map a Database View to a Persistent Class](https://documentation.devexpress.com/#Xaf/CustomDocument3281)).
 
+### See also
 
-
-
-### See also:
 - [How to implement XPO data models connected to different databases within a single application](https://www.devexpress.com/Support/Center/p/E4896)
 - [How to: Use both Entity Framework and XPO in a Single Application](http://documentation.devexpress.com/#Xaf/CustomDocument3476)
