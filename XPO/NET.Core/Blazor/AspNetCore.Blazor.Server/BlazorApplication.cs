@@ -11,7 +11,7 @@ namespace AspNetCore.Blazor.Server;
 public class AspNetCoreBlazorApplication : BlazorApplication {
     public AspNetCoreBlazorApplication() {
         ApplicationName = "AspNetCore";
-        CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.ModuleInfo;
+        CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
         DatabaseVersionMismatch += AspNetCoreBlazorApplication_DatabaseVersionMismatch;
     }
     protected override void OnSetupStarted() {
