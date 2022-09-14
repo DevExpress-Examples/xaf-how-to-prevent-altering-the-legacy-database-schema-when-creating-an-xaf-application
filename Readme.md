@@ -39,4 +39,4 @@ For this task we introduced a custom [IDataStoreAsync](https://documentation.dev
 ### See also
 
 - [How to implement XPO data models connected to different databases within a single application](https://www.devexpress.com/Support/Center/p/E4896)
-- [How to: Use both Entity Framework and XPO in a Single Application](http://documentation.devexpress.com/#Xaf/CustomDocument3476)
+- [How to: Use both Entity Framework and XPO in a Single Application](https://docs.devexpress.com/eXpressAppFramework/113476/business-model-design-orm/how-to-use-both-entity-framework-and-xpo-in-a-single-application?v=21.2)
