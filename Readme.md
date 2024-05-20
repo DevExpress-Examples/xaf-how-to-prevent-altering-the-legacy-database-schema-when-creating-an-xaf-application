@@ -14,6 +14,13 @@ However, one problem still remains: it is the additional _ModuleInfo_ table adde
 
 For this task we introduced a custom [IDataStoreAsync](https://documentation.devexpress.com/CoreLibraries/DevExpress.Xpo.DB.IDataStoreAsync.class) implementation, which works as a proxy. This proxy receives all the requests from the application's Session objects to a data store, and redirects them to actual XPO data store objects based upon a table name that has been passed.
 
+> [!WARNING]
+> We created this example for demonstration purposes and it is not intended to address all possible usage scenarios.
+> If this example does not have certain functionality or you want to change its behavior, you can extend this example. Note that such an action can be complex and would require good knowledge of XAF: [UI Customization Categories by Skill Level](https://www.devexpress.com/products/net/application_framework/xaf-considerations-for-newcomers.xml#ui-customization-categories) and a possible research of how our components function. Refer to the following help topic for more information: [Debug DevExpress .NET Source Code with PDB Symbols](https://docs.devexpress.com/GeneralInformation/403656/support-debug-troubleshooting/debug-controls-with-debug-symbols).
+> We are unable to help with such tasks as custom programming is outside our Support Service purview: [Technical Support Scope](https://www.devexpress.com/products/net/application_framework/xaf-considerations-for-newcomers.xml#support).
+
+
+
 ## Implementation Details
 
 1. In _YourSolutionName.Module_ project create a custom _IDataStoreAsync_ implementation as shown in the [XpoDataStoreProxy.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxy.cs) file;
