@@ -25,7 +25,6 @@ public sealed class AspNetCoreModule : ModuleBase {
         AdditionalExportedTypes.Add(typeof(Note));
         AdditionalExportedTypes.Add(typeof(BaseObject));
         RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.SystemModule.SystemModule));
-        RequiredModuleTypes.Add(typeof(DevExpress.ExpressApp.Objects.BusinessClassLibraryCustomizationModule));
     }
     
     public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB) {
