@@ -12,6 +12,7 @@ using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using DevExpress.Xpo;
 using DevExpress.ExpressApp.Xpo;
+using AspNetCore.Module.BusinessObjects;
 
 namespace AspNetCore.Module;
 

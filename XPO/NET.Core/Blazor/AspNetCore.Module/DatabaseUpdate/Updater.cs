@@ -5,6 +5,7 @@ using DevExpress.ExpressApp.Updating;
 using DevExpress.Xpo;
 using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.BaseImpl;
+using AspNetCore.Module.BusinessObjects;
 
 namespace AspNetCore.Module.DatabaseUpdate;
 
