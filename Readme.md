@@ -26,9 +26,8 @@ For this task we introduced a custom [IDataStoreAsync](https://documentation.dev
 
 1. In _YourSolutionName.Module_ project create a custom _IDataStoreAsync_ implementation as shown in the [XpoDataStoreProxy.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxy.cs) file;
 2. In _YourSolutionName.Module_ project create a custom _IXpoDataStoreProvider_ implementation as shown in the [XpoDataStoreProxyProvider.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxyProvider.cs) file;
-3. For Blazor, in _YourSolutionName.Blazor.Server_ project locate the XAF Application Builder invokation and modify the ObjectSpaceProviders initialization as shown in the [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs) file;
-4. For Win/Web, in _YourSolutionName.Module_ project locate the _ModuleBase_ descendant and modify it as shown in the [Module.cs](./XPO/NET.Framework/WinWebSolution.Module/Module.cs) file;
-5. Define connection strings under the _\<connectionStrings>_ element in the configuration files of your WinForms and ASP.NET executable projects as shown in the _WinWebSolution.Win\App.config_, _WinWebSolution.Win\Web.config_ and _AspNetCore.Blazor.Server\appsettings.json_ files.
+3. In _YourSolutionName.Blazor.Server_ project locate the XAF Application Builder invokation and modify the ObjectSpaceProviders initialization as shown in the [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs) file;
+4. Define connection strings under the _\<connectionStrings>_ element in the configuration files as shown in the _AspNetCore.Blazor.Server\appsettings.json_ file.
 
 ### Important Notes
 
@@ -37,13 +36,9 @@ For this task we introduced a custom [IDataStoreAsync](https://documentation.dev
 3. As an alternative to the demonstrated proxy solution you can consider solutions based on database server features. Create a view mapped to a table in another database as a [Synonym](https://docs.microsoft.com/en-us/sql/relational-databases/synonyms/synonyms-database-engine). Then map a regular persistent class to this view (see [How to: Map a Database View to a Persistent Class](https://documentation.devexpress.com/#Xaf/CustomDocument3281)).
 
 ## Files to Review   
-- [Module.cs](./XPO/NET.Framework/WinWebSolution.Module/Module.cs) for Win/Web or [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs) for Blazor
+- [Startup.cs](./XPO/NET.Core/Blazor/AspNetCore.Blazor.Server/Startup.cs)
 - [XpoDataStoreProxy.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxy.cs)
 - [XpoDataStoreProxyProvider.cs](./XPO/NET.Core/Blazor/AspNetCore.Module/Services/XpoDataStoreProxyProvider.cs)
-
-## Documentation
-
-- [How to: Use both Entity Framework and XPO in a Single Application](https://docs.devexpress.com/eXpressAppFramework/113476/business-model-design-orm/how-to-use-both-entity-framework-and-xpo-in-a-single-application?v=21.2)
 
 ## More Examples
 
