@@ -20,7 +20,7 @@
     <PackageReference Include="DevExpress.ExpressApp.Xpo" Version="26.1.5" />
     <PackageReference Include="DevExpress.Persistent.Base" Version="26.1.5" />
     <PackageReference Include="DevExpress.Persistent.BaseImpl.Xpo" Version="26.1.5" />
-  
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.13" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
   </ItemGroup>
 </Project>
